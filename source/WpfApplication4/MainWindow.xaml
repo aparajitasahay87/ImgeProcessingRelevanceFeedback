@@ -1,0 +1,69 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WpfApplication4.MainWindow"
+        
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"  />
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Visible"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ScrollViewer Height="400" VerticalScrollBarVisibility="Auto">
+                <ListBox x:Name="disp" ItemsSource="{Binding imagelist}" >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="5"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                        <StackPanel x:Name="Option1" Orientation="Horizontal">
+                        <StackPanel x:Name="RF" Visibility="{Binding RfMethodSelected}">
+                        <CheckBox x:Name="imageCheckboxSelection" IsChecked="{Binding IsChecked}" Visibility="Visible" Click="relevantImage_click">
+                        <Image x:Name="final" Source="{Binding image}" Width="80" Height="80" Stretch="Fill"/>
+                        </CheckBox>
+                        </StackPanel>
+       <StackPanel x:Name="Intensity_ColorCode" Visibility="{Binding otherMethodSelected}">
+            <Button x:Name="imageselection" Click="imageselected_click">
+         <Image x:Name="final1" Source="{Binding image}" Width="80" Height="80" Stretch="Fill"/>
+                             </Button>
+                             </StackPanel>      
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="Previouspage" Height="75" Width="100" Content="Previous" Click="previousPage_Click" IsEnabled="False"/>
+                <Button x:Name="Nextpage" Height="75" Width="100" Content="Next" Click="nextPage_click" IsEnabled="True"/>
+                <Label x:Name="pageNumber"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <StackPanel>
+                <Image x:Name="selectImage" Width="200" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+  <StackPanel Orientation="Vertical">
+ <RadioButton x:Name="IntensityMethod" HorizontalAlignment="Stretch" Height="100" Width="100" FontSize="15" HorizontalContentAlignment="Stretch" Content="Intensity"  Checked="intensityMethod_click" />
+ <RadioButton x:Name="ColorCodeMethod" Height="100" Width="100" HorizontalAlignment="Stretch" FontSize="15" HorizontalContentAlignment="Stretch" Content="ColorCode"  Checked="colorCodeMethod_click" />
+ <RadioButton x:Name="RFMethod" Height="100" Width="250" HorizontalAlignment="Stretch" FontSize="15" HorizontalContentAlignment="Stretch" Content="ColorCode+Intensity"  Checked="RFMethod_click" />
+ <Button Name="RelevantImage" Content="RF Method" Click="RFRelevantImage_click" IsEnabled="False"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
